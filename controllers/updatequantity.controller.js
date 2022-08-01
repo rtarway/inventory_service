@@ -55,19 +55,19 @@ exports.incrementQuantityAtLocation = async (req, res) => {
   //const stock_pos = new StockPos(req.body);
   //console.log(stock_pos);
   const _id = req.body._id;
-  let location = null;
-  let SKU = null;
+  let location;
+  let SKU;
 
   if (_id == null) {
-    const location = req.body.location._id;
-    const SKU = req.body.SKU._id;
+     location = req.body.location._id;
+     SKU = req.body.SKU._id;
     console.log(location);
     console.log(SKU);
   }
   else {
     console.log(_id);
-    const location = _id.split(".")[0];
-    const SKU = _id.split(".")[1];
+     location = _id.split(".")[0];
+     SKU = _id.split(".")[1];
     console.log(location);
     console.log(SKU);
   }

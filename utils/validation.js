@@ -8,6 +8,7 @@ const availability_helper = require("../helpers/availability.helper");
 
 exports.validateLocation = async (location) => {
 
+    console.log(location);
     let result_location = await Locations.findById(location);
     if (result_location == null) {
         console.log("Location is not valid")

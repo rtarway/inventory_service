@@ -190,7 +190,7 @@ exports.getAvailabilityFilters = async (reqbody_obj) => {
             }, { "available_quantity": 0 });
 
         console.log("total_available_qty" + JSON.stringify(total_available_qty));
-        return total_available_qty;
+        return {total_available_qty,final_result};
     }
     else {
         return ({ "available_quantity": 0 });
@@ -206,7 +206,9 @@ function process(curr_stock_pos) {
             "status": true,
             "onhand_quantity": (curr_stock_pos.Quantity),
             "reserved_quantity": reserved_qty,
-            "available_quantity": (curr_stock_pos.Quantity) - reserved_qty
+            "available_quantity": (curr_stock_pos.Quantity) - reserved_qty, 
+            "SKU":(curr_stock_pos.SKU._id),
+            "location":(curr_stock_pos.location._id)
         };
         return res_obj;
     }

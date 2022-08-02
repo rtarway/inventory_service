@@ -118,15 +118,28 @@ exports.deleteAllExpiredReservation = async (req, res) => {
 exports.deleteOneReservation = async (req, res) => {
   let deleted_reservation = await Reservations.findById(req.params.id);
 
-  //StockPos.findByIdAndDelete((deleted_reservation.location.concat(".",deleted_reservation.SKU)));
-  (await StockPos.findByIdAndUpdate(deleted_reservation.location.concat(".", deleted_reservation.SKU))).active_reservations.id(req.params.id).remove();
-  Reservations.findByIdAndDelete(deleted_reservation._id);
+  console.log(deleted_reservation);
 
-  if (!deleted_reservation) {
+  if(null!=deleted_reservation)
+  {
+  let parentStockPos = (await StockPos.findById(deleted_reservation.location.concat(".", deleted_reservation.SKU)));
+      parentStockPos.active_reservations.id(req.params.id).remove();
+  let updateStocPos_result = await parentStockPos.save();
+  console.log("test0"+updateStocPos_result);
+ 
+  let result_delete = await Reservations.findByIdAndDelete(req.params.id);
+  console.log("test1"+result_delete);
+  
+  if (updateStocPos_result==null || result_delete==null ) {
     return res.status(404).send();
   }
 
-  res.json(deleted_reservation);
-
-
+  let success_result = [{updateStocPos_result},{result_delete}];
+  console.log(success_result);
+  res.status(200).send(success_result);
+}
+else
+(
+   res.status(404).send()
+)
 }

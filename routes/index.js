@@ -50,7 +50,9 @@ router.delete("/reservations/:id", reservationController.deleteOneReservation);
 
 router.get("/reservations1", reservationController.getAllExpiredReservation);
 
-router.delete("/reservations1", reservationController.deleteAllExpiredReservation);
+//do not use, use delete per reservation
+
+//router.delete("/reservations1", reservationController.deleteAllExpiredReservation);
 
 //All Products Endpoint
 router.get("/products", productController.findAllSkus);

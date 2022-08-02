@@ -8,9 +8,6 @@ const productController = require("../controllers/sku.controller");
 const inboundasnlines = require("../controllers/inboundasnlines.controller");
 const transactions = require("../controllers/transactions.controller");
 
-
-
-
 //router.post("/stockpos", stockPosController.incrementSKUAtLocation);
 //router.get("/availability/SKU/:SKU", availabilityController.getTotalSKUQuantityAtLocations);
 

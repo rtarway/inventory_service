@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
+require('dotenv').config();
 
-mongoose.connect("mongodb+srv://Admin:xatlvhNnzQmMGi3Q@backend-project.fif0jpf.mongodb.net/inventory?retryWrites=true&w=majority");
+const db_user = process.env.mongo_db_username;
+const db_password  =process.env.mongo_db_password;
+const db_host = process.env.mongo_db_hostname;
+const db_name = process.env.mongo_db_database;
+
+mongoose.connect(`mongodb+srv://${db_user}:${db_password}@${db_host }/${db_name}?retryWrites=true&w=majority`);
 
 mongoose.connection.on('open', () => { console.log("Connected to mongodb") });

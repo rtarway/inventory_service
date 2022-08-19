@@ -29,7 +29,7 @@ authentication_app.use(express.json());
 // })
 
 authentication_app.get('/', (req,res) => {
-  express.static(__dirname + "/public");
+  res.redirect('https://github.com/login/oauth/authorize?client_id=bcf3d17d57090637e352');
 })
 
 // Declare the redirect route

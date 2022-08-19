@@ -3,12 +3,13 @@ const routes = require("./routes");
 const axios = require("axios");
 const cors = require('cors');
 const jwt = require("jsonwebtoken");
+const heroku = require("heroku");
 
 require('dotenv').config();
 require("./db");
 
 const api_server_port = process.env.api_server_port;
-const authentication_server_port = process.env.token_server_port;
+const authentication_server_port = process.env.port||process.env.token_server_port;
 
 const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;

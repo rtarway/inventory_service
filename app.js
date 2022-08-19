@@ -21,12 +21,16 @@ authentication_app.use(cors());
 
 app.use(express.json());
 
-authentication_app.use(express.static(__dirname + "/public"));
+//authentication_app.use(express.static(__dirname + "/public"));
 authentication_app.use(express.json());
 
 // app.get('/', (req, res) => {
 //   res.send(process.env);
 // })
+
+authentication_app.get('/', (req,res) => {
+  express.static(__dirname + "/public");
+})
 
 // Declare the redirect route
 authentication_app.get("/oauth/redirect", (req, res) => {

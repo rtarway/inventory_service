@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 require("./db");
 
-const api_server_port = process.env.PORT || process.env.api_server_port;
+//const api_server_port = process.env.PORT || process.env.api_server_port;
 const authentication_server_port = process.env.PORT || process.env.token_server_port;
 
 const clientID = process.env.clientID;
@@ -19,9 +19,10 @@ const authentication_app = express();
 //app.use(cors());
 authentication_app.use(cors());
 
-//app.use(express.json());
+app.use(express.json());
 
 authentication_app.use(express.static(__dirname + "/public"));
+authentication_app.use(express.json());
 
 // app.get('/', (req, res) => {
 //   res.send(process.env);

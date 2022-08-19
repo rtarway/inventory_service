@@ -19,7 +19,7 @@ const authentication_app = express();
 //app.use(cors());
 authentication_app.use(cors());
 
-app.use(express.json());
+//app.use(express.json());
 
 //authentication_app.use(express.static(__dirname + "/public"));
 authentication_app.use(express.json());

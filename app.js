@@ -8,18 +8,18 @@ const jwt = require("jsonwebtoken");
 require('dotenv').config();
 require("./db");
 
-const api_server_port = process.env.api_server_port;
+const api_server_port = process.env.PORT || process.env.api_server_port;
 const authentication_server_port = process.env.PORT || process.env.token_server_port;
 
 const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;
 
-const app = express();
+//const app = express();
 const authentication_app = express();
-app.use(cors());
+//app.use(cors());
 authentication_app.use(cors());
 
-app.use(express.json());
+//app.use(express.json());
 
 authentication_app.use(express.static(__dirname + "/public"));
 
@@ -104,11 +104,11 @@ res.json ({accessToken: accessToken, refreshToken: refreshToken})
   }
 
 /* tie in routes */
-app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
+authentication_app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
 
-app.listen(api_server_port, () => {
-  console.log(`Inventory app running on port ${api_server_port}`)
-});
+// app.listen(api_server_port, () => {
+//   console.log(`Inventory app running on port ${api_server_port}`)
+// });
 
 authentication_app.listen(authentication_server_port, () => {
   console.log(`auth server running on port ${authentication_server_port}`)

@@ -4,7 +4,7 @@
   "description": "inventory service",
   "main": "app.js",
   "scripts": {
-    "test": "mocha",
+    "test": "jest",
     "dev": "nodemon app.js",
     "start": "node app.js"
   },
@@ -16,12 +16,12 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "heroku": "^7.62.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "supertest": "^6.2.4"
   },
   "engines": {
     "node": "18.x"

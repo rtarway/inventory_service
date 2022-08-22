@@ -9,31 +9,31 @@ require('dotenv').config();
 require("./db");
 
 //const api_server_port = process.env.PORT || process.env.api_server_port;
-const authentication_server_port = process.env.PORT || process.env.token_server_port;
+const inventory_server_port = process.env.PORT || process.env.token_server_port;
 
 const clientID = process.env.clientID;
 const clientSecret = process.env.clientSecret;
 
 //const app = express();
-const authentication_app = express();
+const inventory_app = express();
 //app.use(cors());
-authentication_app.use(cors());
+inventory_app.use(cors());
 
 //app.use(express.json());
 
 //authentication_app.use(express.static(__dirname + "/public"));
-authentication_app.use(express.json());
+inventory_app.use(express.json());
 
 // app.get('/', (req, res) => {
 //   res.send(process.env);
 // })
 
-authentication_app.get('/', (req,res) => {
+inventory_app.get('/', (req,res) => {
   res.redirect('https://github.com/login/oauth/authorize?client_id=bcf3d17d57090637e352');
 })
 
 // Declare the redirect route
-authentication_app.get("/oauth/redirect", (req, res) => {
+inventory_app.get("/oauth/redirect", (req, res) => {
   // The req.query object has the query params that
   // were sent to this route. We want the `code` param
   const requestToken = req.query.code;
@@ -80,7 +80,7 @@ authentication_app.get("/oauth/redirect", (req, res) => {
 
 
 //REFRESH TOKEN API
-authentication_app.post("/refreshToken", (req,res) => {
+inventory_app.post("/refreshToken", (req,res) => {
   if (!refreshTokens.includes(req.body.token))
      res.status(400).send("Refresh Token Invalid");
 
@@ -109,14 +109,14 @@ res.json ({accessToken: accessToken, refreshToken: refreshToken})
   }
 
 /* tie in routes */
-authentication_app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
+inventory_app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
 
 // app.listen(api_server_port, () => {
 //   console.log(`Inventory app running on port ${api_server_port}`)
 // });
 
-authentication_app.listen(authentication_server_port, () => {
-  console.log(`auth server running on port ${authentication_server_port}`)
+inventory_app.listen(inventory_server_port, () => {
+  console.log(`inventory service running on port ${inventory_server_port}`)
 });
 
 function validateToken(req, res, next) 
@@ -136,3 +136,5 @@ function validateToken(req, res, next)
    next(); //proceed to the next action in the calling function
    }}); //end of jwt.verify()
   }//end of function
+
+ module.exports = inventory_app;  

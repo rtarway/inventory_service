@@ -17,7 +17,7 @@ exports.addMultipleLocations = async (req, res) => {
 exports.getAllLocations = async (req, res) => {
   console.log("request" + req);
   let all_locations = await Locations.find({});
-  res.json(all_locations);
+  res.json(all_locations).status(200);
 }
 exports.getOneLocation = async (req, res) => {
   let id = req.params.id;

@@ -2,6 +2,7 @@ const express = require("express");
 const routes = require("../routes");
 const request = require("supertest");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 //require('dotenv').config();
 //require("../db");
@@ -9,8 +10,10 @@ const mongoose = require("mongoose");
 const test_app = express();
 
 test_app.use(express.json());
+test_app.use(bodyParser.urlencoded({ extended: false }));
+test_app.use(bodyParser.json());
 test_app.use("/api/", routes);
-//test_app.use(express.urlencoded({ extended: false }));
+test_app.use(express.urlencoded({ extended: false }));
 
 //let dbConnection;
   
@@ -28,9 +31,9 @@ mongoose.connect(`mongodb+srv://${db_user}:${db_password}@${db_host }/${db_name}
 mongoose.connection.on('open', () => { console.log("Connected to mongodb") });
 });
 
-afterAll(() => {
-   mongoose.connection.close(true);
-});
+// afterAll(() => {
+//    mongoose.connection.close(true);
+// });
 
 describe('All Location related endpoints testing', () => {
 
@@ -58,4 +61,24 @@ describe('All Location related endpoints testing', () => {
       });
   });
 
-})
+});
+
+describe('All TestAllAvailability related endpoints testing', () => {
+
+  test("getATP", async () => {
+
+    const reqBody = {"SKU":"100010","location":"store001"};
+
+    await request(test_app).get("/api/availability/atp").send(reqBody)
+      .then((response) => {
+        // Check type and length
+        expect(response.body.SKU).toBe("100010");
+        expect(response.body.location).toBe("store001");
+        expect(response.body.status).toBe(true);
+        //expect(response.body.length).toEqual(7);
+  
+        // Check data
+        //expect(response.body[0]._id).toBe("store001");
+      });
+  });
+});

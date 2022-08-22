@@ -4,8 +4,7 @@ const request = require("supertest");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 
-//require('dotenv').config();
-//require("../db");
+
 
 const test_app = express();
 
@@ -15,7 +14,6 @@ test_app.use(bodyParser.json());
 test_app.use("/api/", routes);
 test_app.use(express.urlencoded({ extended: false }));
 
-//let dbConnection;
   
 beforeAll(() => {
   

@@ -1,4 +1,5 @@
-# inventory_service
+# Inventory service to manage location inventory
+
 Inventory Management
 
 This project is aimed at developing a simple inventory management system with following functionalities

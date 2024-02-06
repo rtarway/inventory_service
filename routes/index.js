@@ -53,6 +53,7 @@ router.get("/reservations1", reservationController.getAllExpiredReservation);
 
 //All Products Endpoint
 router.get("/products", productController.findAllSkus);
+router.get("/products/:id", productController.findOneSkus);
 router.post("/products", productController.addOneSku);
 router.post("/products/load", productController.addMultipleSkus);
 router.delete("/products/load", productController.deleteMultipleSkus);

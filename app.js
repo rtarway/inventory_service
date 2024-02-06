@@ -109,8 +109,8 @@ res.json ({accessToken: accessToken, refreshToken: refreshToken})
   }
 
 /* tie in routes */
-inventory_app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
-
+//inventory_app.use("/api/", validateToken, routes); // http://localhost:3000/api/students
+inventory_app.use("/api/", routes);
 // app.listen(api_server_port, () => {
 //   console.log(`Inventory app running on port ${api_server_port}`)
 // });

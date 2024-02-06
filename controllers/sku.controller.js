@@ -7,6 +7,15 @@ exports.findAllSkus = async (req, res) => {
   res.json(all_products);
 
 }
+
+exports.findOneSkus = async (req, res) => {
+  console.log(req);
+  let id = req.params.id;
+  let one_product_products = await SKU.findById(id);
+  res.json(one_product_products);
+
+}
+
 exports.addOneSku = async (req, res) => {
   const one_product = new SKU(req.body);
   await one_product.save();
